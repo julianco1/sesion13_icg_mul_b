@@ -1,0 +1,72 @@
+<canvas id='canvas' width=800 height=800>
+<script>
+
+function polygon(a,colorBorde,colorRelleno) { //a=[20,12,34,56,78,90,112,167,34,56]
+ctx.beginPath()
+ctx.strokeStyle = colorBorde;
+ctx.fillStyle = colorRelleno;
+ctx.moveTo(a[0],a[1])
+for (i=0; i<a.length; i+=2)
+ctx.lineTo(a[i], a[i+1]);
+ctx.closePath()
+ctx.stroke();
+ctx.fill();
+
+}
+
+function rotacionPunto(cxOb,cyOb,rot){
+var mr= [[Math.cos(r), -Math.sin(r)], [Math.sin(r), Math.cos(r)]]       
+fill_cxOb = letra_a.length;
+c_cxOb = letra_a[0].length;
+fill_cyOb = r.length;
+c_cyOb = r[0].length;
+
+let rotacion = new Array(fill_cxOb);
+for (x=0; x<rotacion.length;x++)
+    Rotacion[x] = new Array(c_cyOb).fill(0);
+
+for (x=0; x < rotacion.length; x++) {
+        for (y=0; y < rotacion[x].length; y++) {                                
+            for (z=0; z<c_cxOb; z++) {
+                rotacion [x][y] = rotacion [x][y] + cxOb[x][z]*cyOb[z][y]; 
+}
+        }
+    }
+return rotacion;
+}
+
+	
+function RotacionDeObj(Func,Rot){
+var a = [];
+
+var m= [Math.cos(Rot), -Math.sin(Rot),Math.sin(Rot), Math.cos(Rot)]
+
+for (i=0; i < Func.length; i+=2){            
+
+a[i]=(Func[i]*m[0]+Func[i+1]*m[1])            
+a[i+1]=(Func[i]*m[2]+Func[i+1]*m[3])          
+  
+  }
+
+return a;
+
+}
+
+	
+var canvas = document.getElementById('canvas')
+var ctx = canvas.getContext('2d');  
+
+var letra_a = [40,40,107,40,139,181,90,181,91,134,49,134,53,185,9,186]; 
+var tria_a=[50,105,70,64,91,102]
+
+
+var r = 75;
+var letra_a_rotada = RotacionDeObj(letra_a, r)
+var tria_a_rotado = RotacionDeObj(tria_a,r)
+polygon(letra_a, 'yellow', 'red')
+polygon(tria_a, 'yellow', 'white') 
+polygon(letra_a_rotada, 'yellow', 'red')
+
+polygon(tria_a_rotado,'yellow', 'white')
+
+</script>
